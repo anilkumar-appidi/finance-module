@@ -1,0 +1,32 @@
+---
+alwaysApply: true
+---
+
+# SOLID Refactoring Rule (React + TypeScript)
+
+## Intent
+- Refactor without changing behavior unless explicitly requested.
+- Use SOLID to reduce coupling, improve readability, and keep changes testable.
+- Keep changes small, reversible, and strongly typed.
+
+## SOLID Checklist (When to Flag)
+- **SRP**: Split modules/components doing unrelated jobs (UI rendering + domain policy + data orchestration in one unit).
+- **OCP**: Replace branching growth (`if`/`switch` by type) with extension points where new behavior is likely.
+- **LSP**: Preserve substitutability; derived implementations must not weaken contracts or surprise callers.
+- **ISP**: Avoid broad prop/type interfaces; expose small, role-specific contracts.
+- **DIP**: Depend on abstractions for services/adapters; inject external effects (API, storage, clock, logger).
+## Refactoring Guardrails
+- Preserve existing externally observable behavior.
+- Favor pure functions and explicit data flow; avoid hidden mutation.
+- Keep side effects at boundaries (hooks/services/adapters), not in domain transforms.
+- Make incremental commits/steps: extract, adapt, verify.
+- Add or update tests with each structural change.
+- Keep accessibility and keyboard behavior unchanged unless explicitly targeted.
+
+### Code Review Rubric for Refactoring
+- **Correctness risk**: Could behavior change under normal, edge, or error flows?
+- **Coupling risk**: Did dependencies become clearer and narrower?
+- **Type safety**: Are contracts explicit, narrow, and inference-friendly?
+- **Test quality**: Do tests verify behavior and protect against regressions?
+- **A11y/UX stability**: Are labels, focus flow, keyboard paths, and semantics preserved?
+- **Change size**: Is the diff minimal but complete for the target improvement?
